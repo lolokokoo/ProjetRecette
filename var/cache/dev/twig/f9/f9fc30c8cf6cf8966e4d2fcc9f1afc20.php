@@ -99,7 +99,7 @@ class __TwigTemplate_ea367e8eab0e6086b082581d01c912c8 extends Template
         echo "    <div class=\"container\">
         ";
         // line 12
-        echo twig_include($this->env, $context, "@WebProfiler/Profiler/header.html.twig", array(), false);
+        echo twig_include($this->env, $context, "@WebProfiler/Profiler/_header.html.twig", array(), false);
         echo "
 
         ";
@@ -230,7 +230,7 @@ class __TwigTemplate_ea367e8eab0e6086b082581d01c912c8 extends Template
 
 {% block body %}
     <div class=\"container\">
-        {{ include('@WebProfiler/Profiler/header.html.twig', with_context = false) }}
+        {{ include('@WebProfiler/Profiler/_header.html.twig', with_context = false) }}
 
         {% set source = file_info.pathname|file_excerpt(line, -1) %}
         <div id=\"content\">

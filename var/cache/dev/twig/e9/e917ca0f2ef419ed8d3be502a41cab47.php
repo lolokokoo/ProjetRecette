@@ -136,7 +136,7 @@ class __TwigTemplate_cadd2e8f4f3d47ceb19095295592091d extends Template
         echo "    <div class=\"container\">
         ";
         // line 36
-        echo twig_include($this->env, $context, "@WebProfiler/Profiler/header.html.twig", array(), false);
+        echo twig_include($this->env, $context, "@WebProfiler/Profiler/_header.html.twig", array(), false);
         echo "
 
         <div class=\"sf-reset sf-redirection-details\">
@@ -224,7 +224,7 @@ class __TwigTemplate_cadd2e8f4f3d47ceb19095295592091d extends Template
 
 {% block body %}
     <div class=\"container\">
-        {{ include('@WebProfiler/Profiler/header.html.twig', with_context = false) }}
+        {{ include('@WebProfiler/Profiler/_header.html.twig', with_context = false) }}
 
         <div class=\"sf-reset sf-redirection-details\">
             <div class=\"block-exception\">

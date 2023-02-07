@@ -72,7 +72,7 @@ class __TwigTemplate_834f6b291fb4dcf7a0d06d163cd1f35a extends Template
         echo "    <div class=\"container\">
         ";
         // line 5
-        echo twig_include($this->env, $context, "@WebProfiler/Profiler/header.html.twig", array(), false);
+        echo twig_include($this->env, $context, "@WebProfiler/Profiler/_header.html.twig", array(), false);
         echo "
 
         <div id=\"summary\">
@@ -589,7 +589,7 @@ class __TwigTemplate_834f6b291fb4dcf7a0d06d163cd1f35a extends Template
 
 {% block body %}
     <div class=\"container\">
-        {{ include('@WebProfiler/Profiler/header.html.twig', with_context = false) }}
+        {{ include('@WebProfiler/Profiler/_header.html.twig', with_context = false) }}
 
         <div id=\"summary\">
         {% block summary %}
