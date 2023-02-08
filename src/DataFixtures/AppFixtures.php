@@ -26,7 +26,6 @@ class AppFixtures extends Fixture
                 ->setPrice(mt_rand(0,100));
             $manager->persist($ingredient);
         }
-
         $manager->flush();
     }
 }
