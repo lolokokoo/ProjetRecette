@@ -41,7 +41,10 @@ return [
                     .'|edition/([^/]++)(*:200)'
                     .'|supression/([^/]++)(*:227)'
                 .')'
-                .'|/recette/edition/([^/]++)(*:261)'
+                .'|/recette/(?'
+                    .'|edition/([^/]++)(*:264)'
+                    .'|supression/([^/]++)(*:291)'
+                .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -54,8 +57,9 @@ return [
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
         200 => [[['_route' => 'ingredient.edit', '_controller' => 'App\\Controller\\IngredientController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
         227 => [[['_route' => 'ingredient.delete', '_controller' => 'App\\Controller\\IngredientController::delete'], ['id'], ['GET' => 0], null, false, true, null]],
-        261 => [
-            [['_route' => 'recipe.edit', '_controller' => 'App\\Controller\\RecipeController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null],
+        264 => [[['_route' => 'recipe.edit', '_controller' => 'App\\Controller\\RecipeController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        291 => [
+            [['_route' => 'recipe.delete', '_controller' => 'App\\Controller\\RecipeController::delete'], ['id'], ['GET' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

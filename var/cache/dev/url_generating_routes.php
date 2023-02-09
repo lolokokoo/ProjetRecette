@@ -24,4 +24,5 @@ return [
     'recipe.index' => [[], ['_controller' => 'App\\Controller\\RecipeController::index'], [], [['text', '/recette']], [], [], []],
     'recipe.new' => [[], ['_controller' => 'App\\Controller\\RecipeController::new'], [], [['text', '/recette/nouveau']], [], [], []],
     'recipe.edit' => [['id'], ['_controller' => 'App\\Controller\\RecipeController::edit'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/recette/edition']], [], [], []],
+    'recipe.delete' => [['id'], ['_controller' => 'App\\Controller\\RecipeController::delete'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/recette/supression']], [], [], []],
 ];
