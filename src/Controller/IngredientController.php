@@ -9,6 +9,7 @@ use App\Repository\IngredientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -46,7 +47,13 @@ class IngredientController extends AbstractController
     {
         $ingredient = new Ingredient();
         //On crée le form
-        $form = $this->createForm(IngredientType::class, $ingredient);
+        $form = $this->createForm(IngredientType::class, $ingredient)
+            ->add('submit', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary mt-4'
+                ],
+                'label' => 'Creer mon ingrédient'
+            ]);
         //On récupére les données du form
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
@@ -77,7 +84,13 @@ class IngredientController extends AbstractController
     {
         //cherche l'ingredient avce l'id correspondant
         //On crée le form
-        $form = $this->createForm(IngredientModifyType::class, $ingredient);
+        $form = $this->createForm(IngredientType::class, $ingredient)
+            ->add('submit', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary mt-4'
+                ],
+                'label' => 'Modifier mon ingrédient'
+            ]);
         //On récupére les données du form
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
