@@ -104,6 +104,7 @@ class RecipeAddType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ],
+                'required' => false,
                 'label' => 'Prix',
                 'label_attr' => [
                     'class' => 'form-label mt-4'

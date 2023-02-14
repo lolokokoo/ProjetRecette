@@ -25,4 +25,6 @@ return [
     'recipe.new' => [[], ['_controller' => 'App\\Controller\\RecipeController::new'], [], [['text', '/recette/nouveau']], [], [], []],
     'recipe.edit' => [['id'], ['_controller' => 'App\\Controller\\RecipeController::edit'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/recette/edition']], [], [], []],
     'recipe.delete' => [['id'], ['_controller' => 'App\\Controller\\RecipeController::delete'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/recette/supression']], [], [], []],
+    'security.login' => [[], ['_controller' => 'App\\Controller\\SecurityController::login'], [], [['text', '/connexion']], [], [], []],
+    'security.logout' => [[], ['_controller' => 'App\\Controller\\SecurityController::logout'], [], [['text', '/deconnexion']], [], [], []],
 ];
