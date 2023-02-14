@@ -56,8 +56,6 @@ class AppFixtures extends Fixture
                 ->setEmail($this->faker->email())
                 ->setRoles(['ROLE_USER'])
                 ->setPlainPassword('password');
-
-
             $manager->persist($user);
         }
         $manager->flush();

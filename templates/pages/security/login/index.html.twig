@@ -11,6 +11,13 @@
             </div>
         {% endif %}
 
+        {# read and display just one flash mesage type #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+
         <h1 class="mt-4">Formulaire de Connexion</h1>
         <form action="{{ path('security.login') }}" method="post">
             <div class="form-group">
