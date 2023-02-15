@@ -48,6 +48,10 @@ return [
                     .'|edition/([^/]++)(*:264)'
                     .'|supression/([^/]++)(*:291)'
                 .')'
+                .'|/utilisateur(?'
+                    .'|/edition/([^/]++)(*:332)'
+                    .'|\\.edition\\-mot\\-de\\-passe/([^/]++)(*:374)'
+                .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -61,8 +65,10 @@ return [
         200 => [[['_route' => 'ingredient.edit', '_controller' => 'App\\Controller\\IngredientController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
         227 => [[['_route' => 'ingredient.delete', '_controller' => 'App\\Controller\\IngredientController::delete'], ['id'], ['GET' => 0], null, false, true, null]],
         264 => [[['_route' => 'recipe.edit', '_controller' => 'App\\Controller\\RecipeController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        291 => [
-            [['_route' => 'recipe.delete', '_controller' => 'App\\Controller\\RecipeController::delete'], ['id'], ['GET' => 0], null, false, true, null],
+        291 => [[['_route' => 'recipe.delete', '_controller' => 'App\\Controller\\RecipeController::delete'], ['id'], ['GET' => 0], null, false, true, null]],
+        332 => [[['_route' => 'user.edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        374 => [
+            [['_route' => 'user.edit.password', '_controller' => 'App\\Controller\\UserController::editPassword'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],
