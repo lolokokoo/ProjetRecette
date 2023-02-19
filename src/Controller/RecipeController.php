@@ -2,10 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Ingredient;
 use App\Entity\Recipe;
-use App\Form\IngredientModifyType;
-use App\Form\IngredientType;
 use App\Form\RecipeAddType;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -42,6 +39,41 @@ class RecipeController extends AbstractController
             'recipes' => $recipes
         ]);
     }
+
+    /**
+     * This controller allow us to show a public recipe
+     *
+     * @param Recipe $recipe
+     * @return Response
+     */
+    #[Route('/recette/{id}', name: 'recipe.show', methods: ['GET'])]
+    #[Security("is_granted('ROLE_USER') and recipe.getIsPublic() === true")]
+    public function show(Recipe $recipe) : Response
+    {
+        return $this->render('pages/recipe/show.html.twig',[
+            'recipe' => $recipe
+        ]);
+    }
+
+    /**
+     *
+     *
+     * @return Response
+     *
+     */
+    #[Route('/recette-publique', name: 'recipe.index.public', methods: ['GET'])]
+    public function indexPublic(PaginatorInterface $paginator, RecipeRepository $repository, Request $request) :Response
+    {
+        $recipes = $paginator->paginate(
+            $repository->findPublicRecipe(null),
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+        return $this->render('pages/recipe/index_public.html.twig',[
+            'recipes' => $recipes
+        ]);
+    }
+
 
     /**
      * This controller show form to create new recipe
