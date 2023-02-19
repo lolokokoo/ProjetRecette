@@ -35,8 +35,18 @@
                             </div>
                         </li>
                     {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{{ path('security.login') }}">Se connecter</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ path('security.registration') }}">S'inscrire</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'security.login' %}active{% endif %}"
+                               href="{{ path('security.login') }}">
+                                Se connecter
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'security.registration' %}active{% endif %}"
+                               href="{{ path('security.registration') }}">
+                                S'inscrire
+                            </a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>

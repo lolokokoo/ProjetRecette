@@ -5,9 +5,9 @@
 {% block body %}
     <div class="container mt-4">
         {%  if not recipes.items is same as([]) %}
-            <h1>Mes Recettes</h1>
+            <h1 class="text-warning">Mes Recettes</h1>
 
-            <a class="btn btn-primary" href="{{ path('recipe.new') }}">
+            <a class="btn btn-light" href="{{ path('recipe.new') }}">
                 Créer une recette
             </a>
 

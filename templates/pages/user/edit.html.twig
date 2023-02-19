@@ -9,8 +9,11 @@
                 {{ message }}
             </div>
         {% endfor %}
-
-        <h1 class="mt-4">Modififiaction de l'utilisateur</h1>
-        {{ form(form) }}
+        <h1 class="mt-4 text-warning">Modififiaction de l'utilisateur</h1>
+        <div class=" d-flex flex-column align-items-center">
+            <div class="w-25">
+                {{ form(form) }}
+            </div>
+        </div>
     </div>
 {% endblock %}
