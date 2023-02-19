@@ -28,7 +28,7 @@ class IngredientController extends AbstractController
     public function index(IngredientRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
         $ingredients = $paginator->paginate(
-            $repository->findAll(), /* query NOT result */
+            $repository->findBy(['user' => $this->getUser()]), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             10 /*limit per page*/
         );
@@ -58,6 +58,8 @@ class IngredientController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $ingredient = $form->getData();
+            //On relie l'ingrédient à l'utilisateur
+            $ingredient->setUser($this->getUser());
             //On met le nouvel ingrédient dans la bd
             $manager->persist($ingredient);//commit
             $manager->flush();//push dans la bd

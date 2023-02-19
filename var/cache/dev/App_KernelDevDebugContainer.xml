@@ -398,6 +398,7 @@
     </service>
     <service id="App\Form\RecipeAddType" class="App\Form\RecipeAddType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
+      <argument type="service" id="security.token_storage"/>
     </service>
     <service id="App\Form\RegistrationType" class="App\Form\RegistrationType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>

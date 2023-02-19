@@ -16,32 +16,10 @@ class UserPasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'first_options' => [
-                    'label' => 'Mot de passe',
-                    'attr' => [
-                        'class' => 'form-control'
-                    ],
-                    'label_attr' => [
-                        'class' => 'form-label'
-                    ]
-                ],
-                'second_options' => [
-                    'label' => 'Confirmation du mot de passe',
-                    'attr' => [
-                        'class' => 'form-control'
-                    ],
-                    'label_attr' => [
-                        'class' => 'form-label'
-                    ]
-                ],
-                'invalid_message' => 'Les mots de passe ne correspondent pas'
-            ])
-            ->add('newPassword', PasswordType::class, [
-                'label' => 'Nouveau mot de passe',
+            ->add('plainPassword', PasswordType::class, [
+                'label' => 'Mot de passe',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control w-25'
                 ],
                 'label_attr' => [
                     'class' => 'form-label mt-4'
@@ -49,7 +27,28 @@ class UserPasswordType extends AbstractType
                 'constraints' => [
                     new Assert\NotBlank(),
                 ]
-
+            ])
+            ->add('newPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'first_options' => [
+                    'label' => 'Nouveau mot de passe',
+                    'attr' => [
+                        'class' => 'form-control'
+                    ],
+                    'label_attr' => [
+                        'class' => 'form-label mt-4'
+                    ]
+                ],
+                'second_options' => [
+                    'label' => 'Confirmation du nouveau mot de passe',
+                    'attr' => [
+                        'class' => 'form-control'
+                    ],
+                    'label_attr' => [
+                        'class' => 'form-label mt-2'
+                    ]
+                ],
+                'invalid_message' => 'Les mots de passe ne correspondent pas'
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
