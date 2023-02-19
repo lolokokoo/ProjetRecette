@@ -3,8 +3,14 @@
 {% block title%}Symrecipe - {{ recipe.name }}{%  endblock %}
 
 {% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-4">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="container w-25">
         <h1 class="mt-4"> {{ recipe.name }}</h1>
+        <span class="badge bg-primary">Note moyenne : {{ recipe.average|number_format(2,'.',',') }} /5</span>
         <span class="badge bg-primary">Crée le {{ recipe.createdAt|date('d/m/y') }}</span>
         {% if recipe.time %}
             <p class="mt-4">Temps (en minutes) : {{ recipe.time }}</p>
@@ -35,9 +41,11 @@
         </div>
         <p class="mt-4">Ingrédients :</p>
         {% for ingredient in recipe.ingredients %}
-            <span class="badge bg-primary">{{ ingredient.name }}</span>
+            <span class="badge bg-light text-dark">{{ ingredient.name }}</span>
         {% endfor %}
-
+        <div class="fromulaire-note">
+            {{ form(form) }}
+        </div>
 
     </div>
 {% endblock %}
