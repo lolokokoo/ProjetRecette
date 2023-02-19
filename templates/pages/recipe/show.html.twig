@@ -3,14 +3,17 @@
 {% block title%}Symrecipe - {{ recipe.name }}{%  endblock %}
 
 {% block body %}
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success mt-4">
-            {{ message }}
-        </div>
-    {% endfor %}
     <div class="container w-25">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
         <h1 class="mt-4"> {{ recipe.name }}</h1>
-        <span class="badge bg-primary">Note moyenne : {{ recipe.average|number_format(2,'.',',') }} /5</span>
+        <div class="recipe_image">
+            <img style="max-width: 400px;" src="{{ vich_uploader_asset(recipe, 'imageFile') }}">
+        </div>
+        <span class="badge bg-primary">Note moyenne : {{ recipe.average == 0 ? 'non noté' : recipe.average|number_format(2,'.',',') }} /5</span>
         <span class="badge bg-primary">Crée le {{ recipe.createdAt|date('d/m/y') }}</span>
         {% if recipe.time %}
             <p class="mt-4">Temps (en minutes) : {{ recipe.time }}</p>

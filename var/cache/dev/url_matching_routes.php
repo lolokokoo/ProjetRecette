@@ -19,6 +19,7 @@ return [
         '/ingredient/nouveau' => [[['_route' => 'ingredient.new', '_controller' => 'App\\Controller\\IngredientController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/recette' => [[['_route' => 'recipe.index', '_controller' => 'App\\Controller\\RecipeController::index'], null, ['GET' => 0], null, false, false, null]],
         '/recette-publique' => [[['_route' => 'recipe.index.public', '_controller' => 'App\\Controller\\RecipeController::indexPublic'], null, ['GET' => 0], null, false, false, null]],
+        '/recette-nouveau' => [[['_route' => 'recipe.new', '_controller' => 'App\\Controller\\RecipeController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/connexion' => [[['_route' => 'security.login', '_controller' => 'App\\Controller\\SecurityController::login'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/deconnexion' => [[['_route' => 'security.logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
         '/inscription' => [[['_route' => 'security.registration', '_controller' => 'App\\Controller\\SecurityController::registration'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
@@ -46,13 +47,12 @@ return [
                 .')'
                 .'|/recette/(?'
                     .'|([^/]++)(*:256)'
-                    .'|nouveau(*:271)'
-                    .'|edition/([^/]++)(*:295)'
-                    .'|supression/([^/]++)(*:322)'
+                    .'|edition/([^/]++)(*:280)'
+                    .'|supression/([^/]++)(*:307)'
                 .')'
                 .'|/utilisateur(?'
-                    .'|/edition/([^/]++)(*:363)'
-                    .'|\\.edition\\-mot\\-de\\-passe/([^/]++)(*:405)'
+                    .'|/edition/([^/]++)(*:348)'
+                    .'|\\.edition\\-mot\\-de\\-passe/([^/]++)(*:390)'
                 .')'
             .')/?$}sDu',
     ],
@@ -67,11 +67,10 @@ return [
         200 => [[['_route' => 'ingredient.edit', '_controller' => 'App\\Controller\\IngredientController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
         227 => [[['_route' => 'ingredient.delete', '_controller' => 'App\\Controller\\IngredientController::delete'], ['id'], ['GET' => 0], null, false, true, null]],
         256 => [[['_route' => 'recipe.show', '_controller' => 'App\\Controller\\RecipeController::show'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        271 => [[['_route' => 'recipe.new', '_controller' => 'App\\Controller\\RecipeController::new'], [], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        295 => [[['_route' => 'recipe.edit', '_controller' => 'App\\Controller\\RecipeController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        322 => [[['_route' => 'recipe.delete', '_controller' => 'App\\Controller\\RecipeController::delete'], ['id'], ['GET' => 0], null, false, true, null]],
-        363 => [[['_route' => 'user.edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        405 => [
+        280 => [[['_route' => 'recipe.edit', '_controller' => 'App\\Controller\\RecipeController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        307 => [[['_route' => 'recipe.delete', '_controller' => 'App\\Controller\\RecipeController::delete'], ['id'], ['GET' => 0], null, false, true, null]],
+        348 => [[['_route' => 'user.edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        390 => [
             [['_route' => 'user.edit.password', '_controller' => 'App\\Controller\\UserController::editPassword'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

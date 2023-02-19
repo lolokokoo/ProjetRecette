@@ -24,7 +24,7 @@ return [
     'recipe.index' => [[], ['_controller' => 'App\\Controller\\RecipeController::index'], [], [['text', '/recette']], [], [], []],
     'recipe.show' => [['id'], ['_controller' => 'App\\Controller\\RecipeController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/recette']], [], [], []],
     'recipe.index.public' => [[], ['_controller' => 'App\\Controller\\RecipeController::indexPublic'], [], [['text', '/recette-publique']], [], [], []],
-    'recipe.new' => [[], ['_controller' => 'App\\Controller\\RecipeController::new'], [], [['text', '/recette/nouveau']], [], [], []],
+    'recipe.new' => [[], ['_controller' => 'App\\Controller\\RecipeController::new'], [], [['text', '/recette-nouveau']], [], [], []],
     'recipe.edit' => [['id'], ['_controller' => 'App\\Controller\\RecipeController::edit'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/recette/edition']], [], [], []],
     'recipe.delete' => [['id'], ['_controller' => 'App\\Controller\\RecipeController::delete'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/recette/supression']], [], [], []],
     'security.login' => [[], ['_controller' => 'App\\Controller\\SecurityController::login'], [], [['text', '/connexion']], [], [], []],

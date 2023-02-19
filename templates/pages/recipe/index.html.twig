@@ -38,7 +38,11 @@
                 {%  for recipe in recipes %}
                     <tr class="table-primary">
                         <th scope="row">{{ recipe.id }}</th>
-                        <td>{{ recipe.name }}</td>
+                        <td>
+                            <a href="{{ path('recipe.show', {id : recipe.id}) }}" class="text-decoration-none text-black">
+                                {{ recipe.name }}
+                            </a>
+                        </td>
                         <td>{{ recipe.price is same as(null) ? 'Non renseigné' : recipe.price}}</td>
                         <td>{{ recipe.difficulty is same as(null) ? 'Non renseigné' : recipe.difficulty}}</td>
                         <td>{{ recipe.createdAt | date("m/d/Y") }}</td>

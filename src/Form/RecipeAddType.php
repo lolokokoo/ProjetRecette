@@ -20,6 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 
 class RecipeAddType extends AbstractType
@@ -88,7 +89,7 @@ class RecipeAddType extends AbstractType
                     'max' => 5
                 ],
                 'required' => false,
-                'label' => 'Nombre de personnes',
+                'label' => 'Difficulté',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
@@ -135,6 +136,13 @@ class RecipeAddType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\NotNull()
+                ]
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image de la recette',
+                'required' => false,
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
                 ]
             ])
             ->add('ingredients', EntityType::class, [

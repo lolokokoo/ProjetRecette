@@ -50,7 +50,7 @@ class RecipeController extends AbstractController
      * @return Response
      */
     #[Route('/recette/{id}', name: 'recipe.show', methods: ['GET','POST'])]
-    #[Security("is_granted('ROLE_USER') and recipe.getIsPublic() === true")]
+    #[Security("is_granted('ROLE_USER') and (recipe.getIsPublic() === true || user === recipe.getUser())")]
     public function show(Recipe $recipe, Request $request, MarkRepository $markRepository, EntityManagerInterface $manager) : Response
     {
         $mark = new Mark();
@@ -114,7 +114,7 @@ class RecipeController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
-    #[Route('/recette/nouveau',name: 'recipe.new', methods: ['GET', 'POST'])]
+    #[Route('/recette-nouveau',name: 'recipe.new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
     public function new(Request $request, EntityManagerInterface $manager) : Response
     {
@@ -124,7 +124,7 @@ class RecipeController extends AbstractController
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                 ],
-                'label' => 'Crerma recette'
+                'label' => 'Crer ma recette'
             ]);
 
         $form->handleRequest($request);
@@ -153,7 +153,7 @@ class RecipeController extends AbstractController
      * @return Response
      */
     #[Route('/recette/edition/{id}', name : 'recipe.edit', methods: ['GET', 'POST'])]
-    #[Security("is_granted('ROLE_USER') and user === ingredient.getUser()")]
+    #[Security("is_granted('ROLE_USER') and user === recipe.getUser()")]
     public function edit(Recipe $recipe, Request $request, EntityManagerInterface $manager) :Response
     {
         //cherche la recette avec l'id correspondant
