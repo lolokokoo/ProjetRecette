@@ -1862,7 +1862,7 @@
                     "dev-master": "2.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Metadata\\": "src/"
@@ -10559,7 +10559,7 @@
                     "dev-master": "2.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Vich\\UploaderBundle\\": "src"

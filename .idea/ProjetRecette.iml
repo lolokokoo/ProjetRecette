@@ -138,6 +138,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-timer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/cache-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/vich/uploader-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jms/metadata" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
