@@ -6,10 +6,10 @@
     <div class="container mt-4">
         {%  if not recipes.items is same as([]) %}
             <h1 class="text-warning">Recettes de la communauté</h1>
-            <div class="d-flex justify-content-center flex-wrap">
+            <div class="row justify-content-center">
                 {% for recipe in recipes %}
-                    <a href="{{ path('recipe.show', {id : recipe.id}) }}" class="text-decoration-none">
-                        <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+                    <a href="{{ path('recipe.show', {id : recipe.id}) }}" class="text-decoration-none col-12 col-lg-6 col-xl-2 mt-3">
+                        <div class="card text-white bg-secondary mb-3 h-100" style="max-width: 20rem;">
                             <div class="card-header">Recette n°{{ recipe.id }}</div>
                             <div class="card-body">
                                 <h4 class="card-title">{{ recipe.name }}</h4>
