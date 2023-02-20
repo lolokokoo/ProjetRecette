@@ -23,6 +23,7 @@
       <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
       <parameter key="KnpPaginatorBundle">Knp\Bundle\PaginatorBundle\KnpPaginatorBundle</parameter>
       <parameter key="VichUploaderBundle">Vich\UploaderBundle\VichUploaderBundle</parameter>
+      <parameter key="KarserRecaptcha3Bundle">Karser\Recaptcha3Bundle\KarserRecaptcha3Bundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -80,6 +81,10 @@
       <parameter key="VichUploaderBundle" type="collection">
         <parameter key="path">C:\ProjetSymfony\ProjetRecette\vendor\vich\uploader-bundle</parameter>
         <parameter key="namespace">Vich\UploaderBundle</parameter>
+      </parameter>
+      <parameter key="KarserRecaptcha3Bundle" type="collection">
+        <parameter key="path">C:\ProjetSymfony\ProjetRecette\vendor\karser\karser-recaptcha3-bundle</parameter>
+        <parameter key="namespace">Karser\Recaptcha3Bundle</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
@@ -220,6 +225,7 @@
     <parameter key="twig.form.resources" type="collection">
       <parameter>@VichUploader/Form/fields.html.twig</parameter>
       <parameter>form_div_layout.html.twig</parameter>
+      <parameter>@KarserRecaptcha3/Form/karser_recaptcha3_widget.html.twig</parameter>
     </parameter>
     <parameter key="twig.default_path">C:\ProjetSymfony\ProjetRecette/templates</parameter>
     <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
@@ -276,6 +282,11 @@
       </parameter>
     </parameter>
     <parameter key="vich_uploader.file_injector.class">Vich\UploaderBundle\Injector\FileInjector</parameter>
+    <parameter key="karser_recaptcha3.site_key">%env(RECAPTCHA3_KEY)%</parameter>
+    <parameter key="karser_recaptcha3.secret_key">%env(RECAPTCHA3_SECRET)%</parameter>
+    <parameter key="karser_recaptcha3.score_threshold">0.5</parameter>
+    <parameter key="karser_recaptcha3.enabled">true</parameter>
+    <parameter key="karser_recaptcha3.host">www.google.com</parameter>
     <parameter key="data_collector.templates" type="collection">
       <parameter key="data_collector.request" type="collection">
         <parameter>request</parameter>
@@ -1304,6 +1315,7 @@
         <argument>App\Form</argument>
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
         <argument>Vich\UploaderBundle\Form\Type</argument>
+        <argument>Karser\Recaptcha3Bundle\Form</argument>
       </argument>
       <argument type="collection">
         <argument>App\Form\ContactType</argument>
@@ -1320,6 +1332,7 @@
         <argument>Symfony\Bridge\Doctrine\Form\Type\EntityType</argument>
         <argument>Vich\UploaderBundle\Form\Type\VichFileType</argument>
         <argument>Vich\UploaderBundle\Form\Type\VichImageType</argument>
+        <argument>Karser\Recaptcha3Bundle\Form\Recaptcha3Type</argument>
       </argument>
       <argument type="collection">
         <argument>Symfony\Component\Form\Extension\Core\Type\TransformationFailureExtension</argument>
@@ -2127,6 +2140,7 @@
           <argument>C:\ProjetSymfony\ProjetRecette\vendor\symfony\maker-bundle\src/translations</argument>
           <argument>C:\ProjetSymfony\ProjetRecette\vendor\sensio\framework-extra-bundle\src/translations</argument>
           <argument>C:\ProjetSymfony\ProjetRecette\vendor\doctrine\doctrine-fixtures-bundle/translations</argument>
+          <argument>C:\ProjetSymfony\ProjetRecette\vendor\karser\karser-recaptcha3-bundle/translations</argument>
         </argument>
         <argument key="cache_vary" type="collection">
           <argument key="scanned_directories" type="collection">
@@ -2148,6 +2162,7 @@
             <argument>C:\ProjetSymfony\ProjetRecette\vendor\symfony\maker-bundle\src/translations</argument>
             <argument>C:\ProjetSymfony\ProjetRecette\vendor\sensio\framework-extra-bundle\src/translations</argument>
             <argument>C:\ProjetSymfony\ProjetRecette\vendor\doctrine\doctrine-fixtures-bundle/translations</argument>
+            <argument>C:\ProjetSymfony\ProjetRecette\vendor\karser\karser-recaptcha3-bundle/translations</argument>
           </argument>
         </argument>
       </argument>
@@ -2259,6 +2274,7 @@
         <argument>When</argument>
         <argument>UniqueEntity</argument>
         <argument>UserPassword</argument>
+        <argument>Recaptcha3</argument>
       </argument>
     </service>
     <service id="translation.reader" class="Symfony\Component\Translation\Reader\TranslationReader">
@@ -3494,7 +3510,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.tWNd9lC"/>
+      <argument type="service" id=".service_locator.Tb76k8O"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -3639,7 +3655,7 @@
       <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
     </service>
     <service id="validator.validator_factory" class="Symfony\Component\Validator\ContainerConstraintValidatorFactory">
-      <argument type="service" id=".service_locator.kzegaci"/>
+      <argument type="service" id=".service_locator.pSux3IH"/>
     </service>
     <service id="validator.expression" class="Symfony\Component\Validator\Constraints\ExpressionValidator">
       <tag name="validator.constraint_validator" alias="validator.expression"/>
@@ -3677,9 +3693,6 @@
     </service>
     <service id="messenger.senders_locator" class="Symfony\Component\Messenger\Transport\Sender\SendersLocator">
       <argument type="collection">
-        <argument key="Symfony\Component\Mailer\Messenger\SendEmailMessage" type="collection">
-          <argument>async</argument>
-        </argument>
         <argument key="Symfony\Component\Notifier\Message\ChatMessage" type="collection">
           <argument>async</argument>
         </argument>
@@ -5149,6 +5162,14 @@
       <call method="addPath">
         <argument>C:\ProjetSymfony\ProjetRecette\vendor\vich\uploader-bundle/templates</argument>
         <argument>!VichUploader</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\ProjetSymfony\ProjetRecette\vendor\karser\karser-recaptcha3-bundle/Resources/views</argument>
+        <argument>KarserRecaptcha3</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\ProjetSymfony\ProjetRecette\vendor\karser\karser-recaptcha3-bundle/Resources/views</argument>
+        <argument>!KarserRecaptcha3</argument>
       </call>
       <call method="addPath">
         <argument>C:\ProjetSymfony\ProjetRecette/templates</argument>
@@ -6781,6 +6802,36 @@
       <argument type="service" id="vich_uploader.metadata_reader"/>
       <argument type="service" id="vich_uploader.upload_handler"/>
     </service>
+    <service id="karser_recaptcha3.host_provider" class="Karser\Recaptcha3Bundle\Services\HostProvider">
+      <argument>www.google.com</argument>
+    </service>
+    <service id="karser_recaptcha3.form.type" class="Karser\Recaptcha3Bundle\Form\Recaptcha3Type">
+      <tag name="form.type"/>
+      <argument>%env(RECAPTCHA3_KEY)%</argument>
+      <argument>www.google.com</argument>
+      <argument>true</argument>
+    </service>
+    <service id="karser_recaptcha3.validator" class="Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator">
+      <tag name="validator.constraint_validator" alias="karser_recaptcha3_validator"/>
+      <argument type="service" id="karser_recaptcha3.google.recaptcha"/>
+      <argument>true</argument>
+      <argument type="service" id="karser_recaptcha3.ip_resolver"/>
+    </service>
+    <service id="karser_recaptcha3.ip_resolver" class="Karser\Recaptcha3Bundle\Services\IpResolver">
+      <argument type="service" id="request_stack"/>
+    </service>
+    <service id="karser_recaptcha3.google.recaptcha" class="ReCaptcha\ReCaptcha">
+      <argument>%env(RECAPTCHA3_SECRET)%</argument>
+      <argument type="service" id="karser_recaptcha3.google.request_method.curl_post"/>
+      <call method="setScoreThreshold">
+        <argument>0.5</argument>
+      </call>
+    </service>
+    <service id="karser_recaptcha3.google.request_method.curl_post" class="ReCaptcha\RequestMethod\CurlPost">
+      <argument type="service" id="karser_recaptcha3.google.request_method.curl"/>
+      <argument type="expression">service('karser_recaptcha3.host_provider').getVerifyUrl()</argument>
+    </service>
+    <service id="karser_recaptcha3.google.request_method.curl" class="ReCaptcha\RequestMethod\Curl"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ContactController" class="App\Controller\ContactController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ContactController" class="App\Controller\ContactController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ContactController" class="App\Controller\ContactController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -7162,9 +7213,10 @@
         <argument key="loader" type="service_closure" id=".errored..service_locator.y4_Zrx..Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
-    <service id=".service_locator.V71r_w4" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.qlnHh.P" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="mailer" type="service_closure" id="mailer.mailer"/>
         <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
@@ -7179,6 +7231,12 @@
       <argument type="collection">
         <argument key="paginator" type="service_closure" id="knp_paginator"/>
         <argument key="repository" type="service_closure" id="App\Repository\IngredientRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.V71r_w4" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
     <service id=".service_locator.G0UfuGH" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -7224,10 +7282,10 @@
         <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
-    <service id=".service_locator.9m._ST." class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.8om49iY" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Controller\ContactController::index" type="service_closure" id=".service_locator.V71r_w4"/>
+        <argument key="App\Controller\ContactController::index" type="service_closure" id=".service_locator.qlnHh.P"/>
         <argument key="App\Controller\HomeController::index" type="service_closure" id=".service_locator.go7IyjU"/>
         <argument key="App\Controller\IngredientController::delete" type="service_closure" id=".service_locator.G0UfuGH"/>
         <argument key="App\Controller\IngredientController::edit" type="service_closure" id=".service_locator.G0UfuGH"/>
@@ -7247,7 +7305,7 @@
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
-        <argument key="App\Controller\ContactController:index" type="service_closure" id=".service_locator.V71r_w4"/>
+        <argument key="App\Controller\ContactController:index" type="service_closure" id=".service_locator.qlnHh.P"/>
         <argument key="App\Controller\HomeController:index" type="service_closure" id=".service_locator.go7IyjU"/>
         <argument key="App\Controller\IngredientController:delete" type="service_closure" id=".service_locator.G0UfuGH"/>
         <argument key="App\Controller\IngredientController:edit" type="service_closure" id=".service_locator.G0UfuGH"/>
@@ -7267,9 +7325,10 @@
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
       </argument>
     </service>
-    <service id=".service_locator.kzegaci" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.pSux3IH" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator" type="service_closure" id="karser_recaptcha3.validator"/>
         <argument key="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator" type="service_closure" id="doctrine.orm.validator.unique"/>
         <argument key="Symfony\Component\Security\Core\Validator\Constraints\UserPasswordValidator" type="service_closure" id="security.validator.user_password"/>
         <argument key="Symfony\Component\Validator\Constraints\EmailValidator" type="service_closure" id="validator.email"/>
@@ -7277,6 +7336,7 @@
         <argument key="Symfony\Component\Validator\Constraints\NotCompromisedPasswordValidator" type="service_closure" id="validator.not_compromised_password"/>
         <argument key="Symfony\Component\Validator\Constraints\WhenValidator" type="service_closure" id="validator.when"/>
         <argument key="doctrine.orm.validator.unique" type="service_closure" id="doctrine.orm.validator.unique"/>
+        <argument key="karser_recaptcha3_validator" type="service_closure" id="karser_recaptcha3.validator"/>
         <argument key="security.validator.user_password" type="service_closure" id="security.validator.user_password"/>
         <argument key="validator.expression" type="service_closure" id="validator.expression"/>
       </argument>
@@ -7437,7 +7497,7 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.tWNd9lC" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Tb76k8O" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\ContactType" type="service_closure" id="App\Form\ContactType"/>
@@ -7447,6 +7507,7 @@
         <argument key="App\Form\RegistrationType" type="service_closure" id="App\Form\RegistrationType"/>
         <argument key="App\Form\UserPasswordType" type="service_closure" id="App\Form\UserPasswordType"/>
         <argument key="App\Form\UserType" type="service_closure" id="App\Form\UserType"/>
+        <argument key="Karser\Recaptcha3Bundle\Form\Recaptcha3Type" type="service_closure" id="karser_recaptcha3.form.type"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service_closure" id="form.type.entity"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service_closure" id="form.type.choice"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ColorType" type="service_closure" id="form.type.color"/>
@@ -8136,12 +8197,12 @@
     <service id="debug.argument_resolver.request.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver"/>
     <service id="debug.argument_resolver.session.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver"/>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.9m._ST."/>
+      <argument type="service" id=".service_locator.8om49iY"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.9m._ST."/>
+      <argument type="service" id=".service_locator.8om49iY"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -9141,9 +9202,11 @@
     <service id="Vich\UploaderBundle\Handler\UploadHandler" alias="vich_uploader.upload_handler"/>
     <service id="Vich\UploaderBundle\Form\Type\VichFileType" alias="vich_uploader.form.type.file"/>
     <service id="Vich\UploaderBundle\Form\Type\VichImageType" alias="vich_uploader.form.type.image"/>
+    <service id="Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator" alias="karser_recaptcha3.validator"/>
+    <service id="karser_recaptcha3.google.request_method" alias="karser_recaptcha3.google.request_method.curl_post"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.9m._ST."/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.8om49iY"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -9164,15 +9227,16 @@
     <service id=".service_locator.80edgLI" alias="messenger.receiver_locator"/>
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.o.uf2zi" alias=".service_locator.7nzbL4K"/>
+    <service id=".service_locator.hHUsqr2" alias=".service_locator.qlnHh.P"/>
     <service id=".service_locator.hPMeJnc" alias=".service_locator.cwiUHKK"/>
     <service id=".service_locator.0x2__nR" alias=".service_locator.G0UfuGH"/>
     <service id=".service_locator.pLEVluA" alias=".service_locator.zyBuAUC"/>
     <service id=".service_locator.KHlGLGc" alias=".service_locator.wuL80Hd"/>
     <service id=".service_locator.fJgMEzw" alias=".service_locator.gA9ZvFz"/>
     <service id=".service_locator.g.MwvmU" alias=".service_locator.hcYvfFK"/>
-    <service id=".service_locator.iTv_p6F" alias=".service_locator.9m._ST."/>
-    <service id=".service_locator.9XMoc9I" alias=".service_locator.kzegaci"/>
-    <service id=".service_locator.LEfCJ1V" alias=".service_locator.tWNd9lC"/>
+    <service id=".service_locator.grvXMUS" alias=".service_locator.8om49iY"/>
+    <service id=".service_locator.sZJMMrU" alias=".service_locator.pSux3IH"/>
+    <service id=".service_locator.8CgsXuG" alias=".service_locator.Tb76k8O"/>
     <service id=".service_locator.seZa69j" alias=".service_locator.4A5Wfr7"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator.VZoQk0z" alias=".service_locator.CshazM0"/>
@@ -9221,9 +9285,10 @@
     <service id="messenger.bus.default" alias="debug.traced.messenger.bus.default"/>
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.gFlme_s" alias=".service_locator.y4_Zrx."/>
-    <service id=".service_locator.6k5RJBU" alias=".service_locator.V71r_w4"/>
+    <service id=".service_locator.vz6k_gy" alias=".service_locator.qlnHh.P"/>
     <service id=".service_locator.rOb8mKz" alias=".service_locator.go7IyjU"/>
     <service id=".service_locator.kc0tw.S" alias=".service_locator.cwiUHKK"/>
+    <service id=".service_locator.6k5RJBU" alias=".service_locator.V71r_w4"/>
     <service id=".service_locator.WfGSDpl" alias=".service_locator.G0UfuGH"/>
     <service id=".service_locator.6GHvMUO" alias=".service_locator.zyBuAUC"/>
     <service id=".service_locator.giFQdAD" alias=".service_locator.wuL80Hd"/>
