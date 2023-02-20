@@ -15,6 +15,11 @@
                             {{ form_errors(form.name) }}
                         </div>
                     </div>
+                </div>
+                    <div class="form-image d-flex flex-column">
+                        {{  form_row(form.imageFile) }}
+                    </div>
+                <div class="w-25">
                     <div class="form-group">
                         {{ form_label(form.nbPeople) }}
                         {{ form_widget(form.nbPeople) }}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Symrecipe - Contact{% endblock %}
+
+{% block body %}
+    {# read and display just one flash mesage type #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-4">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h1>Formulaire de contact</h1>
+    <div class="container w-25">
+        {{ form(form) }}
+    </div>
+{% endblock %}

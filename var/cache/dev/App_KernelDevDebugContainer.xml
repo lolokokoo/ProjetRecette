@@ -381,6 +381,13 @@
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
+    <service id="App\Controller\ContactController" class="App\Controller\ContactController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.CshazM0.App\Controller\ContactController"/>
+      </call>
+    </service>
     <service id="App\Controller\HomeController" class="App\Controller\HomeController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -423,6 +430,9 @@
       <tag name="doctrine.orm.entity_listener"/>
       <argument type="service" id="security.user_password_hasher"/>
     </service>
+    <service id="App\Form\ContactType" class="App\Form\ContactType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\IngredientType" class="App\Form\IngredientType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -441,6 +451,10 @@
     </service>
     <service id="App\Form\UserType" class="App\Form\UserType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
+    </service>
+    <service id="App\Repository\ContactRepository" class="App\Repository\ContactRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
     </service>
     <service id="App\Repository\IngredientRepository" class="App\Repository\IngredientRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
@@ -1292,6 +1306,7 @@
         <argument>Vich\UploaderBundle\Form\Type</argument>
       </argument>
       <argument type="collection">
+        <argument>App\Form\ContactType</argument>
         <argument>App\Form\IngredientType</argument>
         <argument>App\Form\MarkType</argument>
         <argument>App\Form\RecipeAddType</argument>
@@ -3479,7 +3494,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.TeWMtG4"/>
+      <argument type="service" id=".service_locator.tWNd9lC"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -4386,7 +4401,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.i1Rdz5B"/>
+      <argument type="service" id=".service_locator.s.MfkhT"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -6766,6 +6781,9 @@
       <argument type="service" id="vich_uploader.metadata_reader"/>
       <argument type="service" id="vich_uploader.upload_handler"/>
     </service>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ContactController" class="App\Controller\ContactController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ContactController" class="App\Controller\ContactController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\ContactController" class="App\Controller\ContactController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6783,6 +6801,8 @@
     <service id=".abstract.instanceof.App\Controller\UserController" class="App\Controller\UserController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ContactType" class="App\Form\ContactType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\ContactType" class="App\Form\ContactType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\IngredientType" class="App\Form\IngredientType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\IngredientType" class="App\Form\IngredientType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\MarkType" class="App\Form\MarkType" autowire="true" abstract="true"/>
@@ -6795,6 +6815,8 @@
     <service id=".abstract.instanceof.App\Form\UserPasswordType" class="App\Form\UserPasswordType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\UserType" class="App\Form\UserType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\UserType" class="App\Form\UserType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ContactRepository" class="App\Repository\ContactRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\ContactRepository" class="App\Repository\ContactRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\IngredientRepository" class="App\Repository\IngredientRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\IngredientRepository" class="App\Repository\IngredientRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\MarkRepository" class="App\Repository\MarkRepository" autowire="true" abstract="true"/>
@@ -7140,6 +7162,12 @@
         <argument key="loader" type="service_closure" id=".errored..service_locator.y4_Zrx..Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
+    <service id=".service_locator.V71r_w4" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
     <service id=".service_locator.go7IyjU" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7151,12 +7179,6 @@
       <argument type="collection">
         <argument key="paginator" type="service_closure" id="knp_paginator"/>
         <argument key="repository" type="service_closure" id="App\Repository\IngredientRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.V71r_w4" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
     <service id=".service_locator.G0UfuGH" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -7202,9 +7224,10 @@
         <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
-    <service id=".service_locator.JMmGLQA" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.9m._ST." class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Controller\ContactController::index" type="service_closure" id=".service_locator.V71r_w4"/>
         <argument key="App\Controller\HomeController::index" type="service_closure" id=".service_locator.go7IyjU"/>
         <argument key="App\Controller\IngredientController::delete" type="service_closure" id=".service_locator.G0UfuGH"/>
         <argument key="App\Controller\IngredientController::edit" type="service_closure" id=".service_locator.G0UfuGH"/>
@@ -7224,6 +7247,7 @@
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
+        <argument key="App\Controller\ContactController:index" type="service_closure" id=".service_locator.V71r_w4"/>
         <argument key="App\Controller\HomeController:index" type="service_closure" id=".service_locator.go7IyjU"/>
         <argument key="App\Controller\IngredientController:delete" type="service_closure" id=".service_locator.G0UfuGH"/>
         <argument key="App\Controller\IngredientController:edit" type="service_closure" id=".service_locator.G0UfuGH"/>
@@ -7413,9 +7437,10 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.TeWMtG4" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.tWNd9lC" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Form\ContactType" type="service_closure" id="App\Form\ContactType"/>
         <argument key="App\Form\IngredientType" type="service_closure" id="App\Form\IngredientType"/>
         <argument key="App\Form\MarkType" type="service_closure" id="App\Form\MarkType"/>
         <argument key="App\Form\RecipeAddType" type="service_closure" id="App\Form\RecipeAddType"/>
@@ -7526,9 +7551,10 @@
         <argument key="App\EntityListener\UserListener" type="service_closure" id="App\EntityListener\UserListener"/>
       </argument>
     </service>
-    <service id=".service_locator.i1Rdz5B" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.s.MfkhT" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Repository\ContactRepository" type="service_closure" id="App\Repository\ContactRepository"/>
         <argument key="App\Repository\IngredientRepository" type="service_closure" id="App\Repository\IngredientRepository"/>
         <argument key="App\Repository\MarkRepository" type="service_closure" id="App\Repository\MarkRepository"/>
         <argument key="App\Repository\RecipeRepository" type="service_closure" id="App\Repository\RecipeRepository"/>
@@ -7796,6 +7822,12 @@
         <argument key="serializer" type="service_closure" id="debug.serializer" on-invalid="ignore"/>
         <argument key="twig" type="service_closure" id="twig" on-invalid="ignore"/>
       </argument>
+    </service>
+    <service id=".service_locator.CshazM0.App\Controller\ContactController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ContactController"/>
+      <argument>App\Controller\ContactController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CshazM0" method="withContext"/>
     </service>
     <service id=".service_locator.CshazM0.App\Controller\HomeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\HomeController"/>
@@ -8104,12 +8136,12 @@
     <service id="debug.argument_resolver.request.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver"/>
     <service id="debug.argument_resolver.session.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver"/>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.JMmGLQA"/>
+      <argument type="service" id=".service_locator.9m._ST."/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.JMmGLQA"/>
+      <argument type="service" id=".service_locator.9m._ST."/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -9111,7 +9143,7 @@
     <service id="Vich\UploaderBundle\Form\Type\VichImageType" alias="vich_uploader.form.type.image"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.JMmGLQA"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.9m._ST."/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -9138,9 +9170,9 @@
     <service id=".service_locator.KHlGLGc" alias=".service_locator.wuL80Hd"/>
     <service id=".service_locator.fJgMEzw" alias=".service_locator.gA9ZvFz"/>
     <service id=".service_locator.g.MwvmU" alias=".service_locator.hcYvfFK"/>
-    <service id=".service_locator.dzpxF8j" alias=".service_locator.JMmGLQA"/>
+    <service id=".service_locator.iTv_p6F" alias=".service_locator.9m._ST."/>
     <service id=".service_locator.9XMoc9I" alias=".service_locator.kzegaci"/>
-    <service id=".service_locator.7uo94Fh" alias=".service_locator.TeWMtG4"/>
+    <service id=".service_locator.LEfCJ1V" alias=".service_locator.tWNd9lC"/>
     <service id=".service_locator.seZa69j" alias=".service_locator.4A5Wfr7"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator.VZoQk0z" alias=".service_locator.CshazM0"/>
@@ -9189,9 +9221,9 @@
     <service id="messenger.bus.default" alias="debug.traced.messenger.bus.default"/>
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.gFlme_s" alias=".service_locator.y4_Zrx."/>
+    <service id=".service_locator.6k5RJBU" alias=".service_locator.V71r_w4"/>
     <service id=".service_locator.rOb8mKz" alias=".service_locator.go7IyjU"/>
     <service id=".service_locator.kc0tw.S" alias=".service_locator.cwiUHKK"/>
-    <service id=".service_locator.6k5RJBU" alias=".service_locator.V71r_w4"/>
     <service id=".service_locator.WfGSDpl" alias=".service_locator.G0UfuGH"/>
     <service id=".service_locator.6GHvMUO" alias=".service_locator.zyBuAUC"/>
     <service id=".service_locator.giFQdAD" alias=".service_locator.wuL80Hd"/>
