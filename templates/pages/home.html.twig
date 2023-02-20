@@ -10,7 +10,7 @@
             <h2 class="mt-4 text-warning">Recettes récentes de la communauté</h2>
             <div class="row justify-content-center">
                 {% for recipe in recipes %}
-                    <a href="{{ path('recipe.show', {id : recipe.id}) }}" class="text-decoration-none col-12 col-lg-6 col-xl-3" style="max-width: 20rem;">
+                    <a href="{{ path('recipe.show', {id : recipe.id}) }}" class="text-decoration-none col-12 col-lg-6 col-xl-3 mb-4" style="max-width: 20rem;">
                         <div class="card text-white bg-secondary mb-3 h-100">
                             <div class="card-header">Recette n°{{ recipe.id }}</div>
                             <div class="card-body">

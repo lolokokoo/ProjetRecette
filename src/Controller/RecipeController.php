@@ -44,7 +44,7 @@ class RecipeController extends AbstractController
     }
 
     /**
-     * This controller allow us to show a public recipe
+     * This controller show a public recipe
      *
      * @param Recipe $recipe
      * @return Response
@@ -88,7 +88,7 @@ class RecipeController extends AbstractController
     }
 
     /**
-     *
+     *This controller show all public recipes
      *
      * @return Response
      *
@@ -184,6 +184,13 @@ class RecipeController extends AbstractController
         ]);
     }
 
+    /**
+     * This controller delete a recipe
+     *
+     * @param EntityManagerInterface $manager
+     * @param Recipe $recipe
+     * @return Response
+     */
     #[Route('/recette/supression/{id}', 'recipe.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Recipe $recipe) : Response
     {

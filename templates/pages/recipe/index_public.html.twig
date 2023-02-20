@@ -8,7 +8,7 @@
             <h1 class="text-warning">Recettes de la communauté</h1>
             <div class="row justify-content-center">
                 {% for recipe in recipes %}
-                    <a href="{{ path('recipe.show', {id : recipe.id}) }}" class="text-decoration-none col-12 col-lg-6 col-xl-2 mt-3">
+                    <a href="{{ path('recipe.show', {id : recipe.id}) }}" class="text-decoration-none col-12 col-lg-6 col-xl-3 mt-3">
                         <div class="card text-white bg-secondary mb-3 h-100" style="max-width: 20rem;">
                             <div class="card-header">Recette n°{{ recipe.id }}</div>
                             <div class="card-body">
