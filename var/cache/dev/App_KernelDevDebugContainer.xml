@@ -483,6 +483,9 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Service\MailService" class="App\Service\MailService" autowire="true" autoconfigure="true">
+      <argument type="service" id="mailer.mailer"/>
+    </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">
       <tag name="kernel.event_subscriber"/>
@@ -7213,10 +7216,10 @@
         <argument key="loader" type="service_closure" id=".errored..service_locator.y4_Zrx..Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
-    <service id=".service_locator.qlnHh.P" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.AFctFp1" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="mailer" type="service_closure" id="mailer.mailer"/>
+        <argument key="mailService" type="service_closure" id="App\Service\MailService"/>
         <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
@@ -7282,10 +7285,10 @@
         <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
-    <service id=".service_locator.8om49iY" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.9mHBa7a" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Controller\ContactController::index" type="service_closure" id=".service_locator.qlnHh.P"/>
+        <argument key="App\Controller\ContactController::index" type="service_closure" id=".service_locator.AFctFp1"/>
         <argument key="App\Controller\HomeController::index" type="service_closure" id=".service_locator.go7IyjU"/>
         <argument key="App\Controller\IngredientController::delete" type="service_closure" id=".service_locator.G0UfuGH"/>
         <argument key="App\Controller\IngredientController::edit" type="service_closure" id=".service_locator.G0UfuGH"/>
@@ -7305,7 +7308,7 @@
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
-        <argument key="App\Controller\ContactController:index" type="service_closure" id=".service_locator.qlnHh.P"/>
+        <argument key="App\Controller\ContactController:index" type="service_closure" id=".service_locator.AFctFp1"/>
         <argument key="App\Controller\HomeController:index" type="service_closure" id=".service_locator.go7IyjU"/>
         <argument key="App\Controller\IngredientController:delete" type="service_closure" id=".service_locator.G0UfuGH"/>
         <argument key="App\Controller\IngredientController:edit" type="service_closure" id=".service_locator.G0UfuGH"/>
@@ -8197,12 +8200,12 @@
     <service id="debug.argument_resolver.request.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver"/>
     <service id="debug.argument_resolver.session.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver"/>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.8om49iY"/>
+      <argument type="service" id=".service_locator.9mHBa7a"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.8om49iY"/>
+      <argument type="service" id=".service_locator.9mHBa7a"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -9206,7 +9209,7 @@
     <service id="karser_recaptcha3.google.request_method" alias="karser_recaptcha3.google.request_method.curl_post"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.8om49iY"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.9mHBa7a"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -9227,14 +9230,14 @@
     <service id=".service_locator.80edgLI" alias="messenger.receiver_locator"/>
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.o.uf2zi" alias=".service_locator.7nzbL4K"/>
-    <service id=".service_locator.hHUsqr2" alias=".service_locator.qlnHh.P"/>
+    <service id=".service_locator.cCkrJkz" alias=".service_locator.AFctFp1"/>
     <service id=".service_locator.hPMeJnc" alias=".service_locator.cwiUHKK"/>
     <service id=".service_locator.0x2__nR" alias=".service_locator.G0UfuGH"/>
     <service id=".service_locator.pLEVluA" alias=".service_locator.zyBuAUC"/>
     <service id=".service_locator.KHlGLGc" alias=".service_locator.wuL80Hd"/>
     <service id=".service_locator.fJgMEzw" alias=".service_locator.gA9ZvFz"/>
     <service id=".service_locator.g.MwvmU" alias=".service_locator.hcYvfFK"/>
-    <service id=".service_locator.grvXMUS" alias=".service_locator.8om49iY"/>
+    <service id=".service_locator.kfDP6Wq" alias=".service_locator.9mHBa7a"/>
     <service id=".service_locator.sZJMMrU" alias=".service_locator.pSux3IH"/>
     <service id=".service_locator.8CgsXuG" alias=".service_locator.Tb76k8O"/>
     <service id=".service_locator.seZa69j" alias=".service_locator.4A5Wfr7"/>
@@ -9285,7 +9288,7 @@
     <service id="messenger.bus.default" alias="debug.traced.messenger.bus.default"/>
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.gFlme_s" alias=".service_locator.y4_Zrx."/>
-    <service id=".service_locator.vz6k_gy" alias=".service_locator.qlnHh.P"/>
+    <service id=".service_locator.tBiFMo2" alias=".service_locator.AFctFp1"/>
     <service id=".service_locator.rOb8mKz" alias=".service_locator.go7IyjU"/>
     <service id=".service_locator.kc0tw.S" alias=".service_locator.cwiUHKK"/>
     <service id=".service_locator.6k5RJBU" alias=".service_locator.V71r_w4"/>
