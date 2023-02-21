@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'contact.index')]
-    public function index(Request $request, EntityManagerInterface $manager, MailService $mailService): Response
+    public function index(Request $request, EntityManagerInterface $manager, /*MailService $mailService*/): Response
     {
         $contact = new Contact();
         if ($this->getUser()){
@@ -30,12 +30,12 @@ class ContactController extends AbstractController
             $manager->flush();
 
             //Envoie de l'email (en local => mailtrap.io)
-            $mailService->sendEmail(
-                $contact->getEmail(),
-                $contact->getSubject(),
-                'emails/contact.html.twig',
-                ['contact' => $contact]
-            );
+            //$mailService->sendEmail(
+            //    $contact->getEmail(),
+            //    $contact->getSubject(),
+            //    'emails/contact.html.twig',
+            //    ['contact' => $contact]
+            //);
 
             $this->addFlash(
                 'success',
