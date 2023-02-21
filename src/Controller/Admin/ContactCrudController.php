@@ -31,7 +31,6 @@ class ContactCrudController extends AbstractCrudController
             ->setPaginatorPageSize(20);
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -43,7 +42,6 @@ class ContactCrudController extends AbstractCrudController
                 ->hideOnIndex(),
             DateTimeField::new('createdAt')
                 ->hideOnForm(),
-
         ];
     }
 }
