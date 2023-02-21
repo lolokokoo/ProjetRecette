@@ -80,7 +80,7 @@ class Recipe
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Mark::class)]
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Mark::class, cascade: ["remove"])]
     private Collection $marks;
 
     private ?float $average = null;
