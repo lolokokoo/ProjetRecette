@@ -13,10 +13,12 @@ use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class RecipeController extends AbstractController
 {
@@ -96,8 +98,16 @@ class RecipeController extends AbstractController
     #[Route('/recette-communaute', name: 'recipe.community', methods: ['GET'])]
     public function indexPublic(PaginatorInterface $paginator, RecipeRepository $repository, Request $request) :Response
     {
+        //Mise en place du cache
+        $cache = new FilesystemAdapter();
+        //On tente de récupérer une value en fonction de la key. Si on l'a pas on execute la fonction
+        $data = $cache->get('recipes', function (ItemInterface $item) use ($repository){
+            $item->expiresAfter(15);
+            return $repository->findPublicRecipe(null);
+        });
+
         $recipes = $paginator->paginate(
-            $repository->findPublicRecipe(null),
+            $data,
             $request->query->getInt('page', 1), /*page number*/
             10 /*limit per page*/
         );
