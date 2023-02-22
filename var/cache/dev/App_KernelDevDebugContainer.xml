@@ -408,6 +408,17 @@
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
+    <service id="App\Command\CreateAdministratorCommand" class="App\Command\CreateAdministratorCommand" autowire="true" autoconfigure="true">
+      <tag name="console.command"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <call method="setName">
+        <argument>app:create-administrator</argument>
+      </call>
+      <call method="setDescription">
+        <argument>Create an administrator</argument>
+      </call>
+    </service>
     <service id="App\Controller\Admin\ContactCrudController" class="App\Controller\Admin\ContactCrudController" public="true" autowire="true" autoconfigure="true">
       <tag name="ea.crud_controller"/>
       <tag name="controller.service_arguments"/>
@@ -7296,6 +7307,8 @@
       <tag name="assets.package" package="easyadmin.assets.package"/>
       <argument type="service" id="request_stack"/>
     </service>
+    <service id=".instanceof.Symfony\Component\Console\Command\Command.0.App\Command\CreateAdministratorCommand" class="App\Command\CreateAdministratorCommand" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Command\CreateAdministratorCommand" class="App\Command\CreateAdministratorCommand" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\ContactCrudController" class="App\Controller\Admin\ContactCrudController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\ContactCrudController" class="App\Controller\Admin\ContactCrudController" autowire="true" abstract="true"/>
     <service id=".instanceof.EasyCorp\Bundle\EasyAdminBundle\Contracts\Controller\CrudControllerInterface.0.App\Controller\Admin\ContactCrudController" class="App\Controller\Admin\ContactCrudController" autowire="true" abstract="true"/>
@@ -9055,6 +9068,13 @@
     <service id=".errored..service_locator.wuL80Hd.App\Entity\Recipe" class="App\Entity\Recipe"/>
     <service id=".errored..service_locator.gA9ZvFz.App\Entity\Recipe" class="App\Entity\Recipe"/>
     <service id=".errored..service_locator.hcYvfFK.App\Entity\User" class="App\Entity\User"/>
+    <service id=".App\Command\CreateAdministratorCommand.lazy" class="Symfony\Component\Console\Command\LazyCommand">
+      <argument>app:create-administrator</argument>
+      <argument type="collection"/>
+      <argument>Create an administrator</argument>
+      <argument>false</argument>
+      <argument type="service_closure" id="App\Command\CreateAdministratorCommand"/>
+    </service>
     <service id=".console.command.about.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>about</argument>
       <argument type="collection"/>
@@ -9564,8 +9584,9 @@
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.Qh6F9e4"/>
+      <argument type="service" id=".service_locator.FGPD2FE"/>
       <argument type="collection">
+        <argument key="app:create-administrator">App\Command\CreateAdministratorCommand</argument>
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
         <argument key="cache:clear">console.command.cache_clear</argument>
@@ -9678,9 +9699,10 @@
         <argument key="make:stimulus-controller">maker.auto_command.make_stimulus_controller</argument>
       </argument>
     </service>
-    <service id=".service_locator.Qh6F9e4" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.FGPD2FE" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Command\CreateAdministratorCommand" type="service_closure" id=".App\Command\CreateAdministratorCommand.lazy"/>
         <argument key="console.command.about" type="service_closure" id=".console.command.about.lazy"/>
         <argument key="console.command.assets_install" type="service_closure" id=".console.command.assets_install.lazy"/>
         <argument key="console.command.cache_clear" type="service_closure" id=".console.command.cache_clear.lazy"/>
