@@ -2649,7 +2649,7 @@
         <argument>kernel.request</argument>
         <argument type="collection">
           <argument type="service_closure" id="App\EventSubscriber\KernelSubscriber"/>
-          <argument>onKernelrequest</argument>
+          <argument>onKernelRequest</argument>
         </argument>
         <argument>0</argument>
       </call>
