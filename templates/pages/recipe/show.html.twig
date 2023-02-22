@@ -16,7 +16,7 @@
         <span class="badge bg-primary">Note moyenne : {{ recipe.average == 0 ? 'non noté' : recipe.average|number_format(2,'.',',') }} /5</span>
         <span class="badge bg-primary">Crée le {{ recipe.createdAt|date('d/m/y') }}</span>
         {% if recipe.time %}
-            <p class="mt-4">Temps (en minutes) : {{ recipe.time }}</p>
+            <p class="mt-4">Temps (en minutes) : {{ recipe.time|min_to_our }}</p>
         {% else %}
             <p class="mt-4">Temps non renseigné</p>
         {% endif %}
